@@ -48,8 +48,6 @@ def objectsPath(cascades): #Function for transfers objects in another functions
                     results.append((file, video_results))
     return results
 
-print(objectsPath(cascades))
-
 def withoutWindows(object, file): # function for show windows or not  
     user_choice = input('Do you want to see and select objects?')
     if user_choice == 'y':
@@ -70,9 +68,7 @@ def withoutWindows(object, file): # function for show windows or not
     elif user_choice == 'n':
         return None
 
-   
-
-def recofnizedFunc(user_input_parametrs, object, cascades, save_dir=None):
+def recofnizedFunc(user_input_parametrs, object, cascades, save_dir=None): #this func recognize objects
     ext = object.lower().split('.')[-1]
 
     if ext in ['png', 'jpg', 'jpeg']:
@@ -109,7 +105,17 @@ def recofnizedFunc(user_input_parametrs, object, cascades, save_dir=None):
                 for (x, y, w, h) in detected_video:
                     cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
         
-            
+def saveObjects (user_input_parametrs, cascades ):
+    if user_input_parametrs in cascades:
+        for values in user_input_parametrs:
+            if values == cascades.values():
+                if not os.path.exists(base_dir, 'recognized_objects'):
+                    recognized_folder = os.path.join(base_dir, 'recognized_objects')
+                    os.makedirs(recognized_folder, exist_ok=True)
+                    saveFolders = os.path.join(base_dir, values + '_recognized_object')
+                    os.makedirs(saveFolders, exist_ok=True)
+
+
 
 
 
